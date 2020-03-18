@@ -47,13 +47,13 @@ const init = () => {
     cube: {
       geometry: new THREE.BoxGeometry(4, 4, 4),
       color: 0xe5ff00,
-      positions: [0, -4, 3, 0],
+      positions: [0, 0, 4, 0],
       shadow: 'cast',
     },
     sphere: {
-      geometry: new THREE.SphereGeometry(4, 20, 20),
+      geometry: new THREE.SphereGeometry(2.5, 20, 20),
       color: 0x00ff7b,
-      positions: [0, 20, 4, 2],
+      positions: [0, 0, 0, 0],
       shadow: 'cast',
     },
   }
@@ -72,6 +72,8 @@ const init = () => {
 
   document.getElementById('WEBGL-output').appendChild(renderer.domElement)
 
+  let step = 0
+
   const renderScene = () => {
     stats.update()
 
@@ -79,6 +81,11 @@ const init = () => {
     cube.rotation.x += 0.02
     cube.rotation.y += 0.02
     cube.rotation.z += 0.05
+
+    const sphere = scene.children.find(child => child.name === 'sphere')
+    step += 0.04
+    sphere.position.x = 20 * Math.cos(step)
+    sphere.position.y = 20 * Math.sin(step)
 
     requestAnimationFrame(renderScene)
     renderer.render(scene, camera)
