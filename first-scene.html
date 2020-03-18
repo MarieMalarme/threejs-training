@@ -23,13 +23,19 @@
       const planeGeometry = new THREE.PlaneGeometry(60, 20)
       const planeMaterial = new THREE.MeshBasicMaterial({color: 0xb300ff})
       const plane = new THREE.Mesh(planeGeometry, planeMaterial)
-
       plane.rotation.x = -0.5 * Math.PI
       plane.position.x = 15
       plane.position.y = 0
       plane.position.z = 0
-
       scene.add(plane)
+
+      const cubeGeometry = new THREE.BoxGeometry(4, 4, 4)
+      const cubeMaterial = new THREE.MeshBasicMaterial({ color: 0xe5ff00, wireframe: true })
+      const cube = new THREE.Mesh(cubeGeometry, cubeMaterial)
+      cube.position.x = -4
+      cube.position.y = 3
+      cube.position.z = 0
+      scene.add(cube)
 
       camera.position.x = -30
       camera.position.y = 40
