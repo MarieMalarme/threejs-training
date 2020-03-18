@@ -28,15 +28,19 @@ const gui = new dat.GUI()
 gui.add(controls, 'rotation', 0, 0.5)
 gui.add(controls, 'revolution', 0, 0.5)
 
+let camera
+let scene
+let renderer
+
 const init = () => {
-  const scene = new THREE.Scene()
-  const camera = new THREE.PerspectiveCamera(
+  scene = new THREE.Scene()
+  camera = new THREE.PerspectiveCamera(
     45,
     window.innerWidth / window.innerHeight,
     0.1,
     1000,
   )
-  const renderer = new THREE.WebGLRenderer()
+  renderer = new THREE.WebGLRenderer()
   renderer.setClearColor(new THREE.Color(0xeeeeee, 1.0))
   renderer.setSize(window.innerWidth, window.innerHeight)
   renderer.shadowMapEnabled = true
@@ -104,5 +108,13 @@ const init = () => {
   }
   renderScene()
 }
+
+const onResize = () => {
+  camera.aspect = window.innerWidth / window.innerHeight
+  camera.updateProjectionMatrix()
+  renderer.setSize(window.innerWidth, window.innerHeight)
+}
+
+window.addEventListener('resize', onResize, false)
 
 window.onload = init
