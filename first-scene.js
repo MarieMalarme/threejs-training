@@ -11,6 +11,13 @@ const create = ({ geometry, color, positions, shadow }, scene) => {
   scene.add(object)
 }
 
+const getStats = () => {
+  const stats = new Stats()
+  stats.setMode(0)
+  document.getElementById('stats-output').appendChild(stats.domElement)
+  return stats
+}
+
 const init = () => {
   const scene = new THREE.Scene()
   const camera = new THREE.PerspectiveCamera(
@@ -26,6 +33,8 @@ const init = () => {
 
   const axes = new THREE.AxisHelper(20)
   scene.add(axes)
+
+  const stats = getStats()
 
   const objects = {
     plane: {
@@ -62,7 +71,12 @@ const init = () => {
 
   document.getElementById('WEBGL-output').appendChild(renderer.domElement)
 
-  renderer.render(scene, camera)
+  const renderScene = () => {
+    stats.update()
+    requestAnimationFrame(renderScene)
+    renderer.render(scene, camera)
+  }
+  renderScene()
 }
 
 window.onload = init
