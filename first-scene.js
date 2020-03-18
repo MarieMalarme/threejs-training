@@ -87,6 +87,9 @@ const init = () => {
     sphere.position.x = 20 * Math.cos(step)
     sphere.position.y = 20 * Math.sin(step)
 
+    spotLight.position.x = -40 * Math.cos(step)
+    spotLight.position.y = 60 * Math.sin(step)
+
     requestAnimationFrame(renderScene)
     renderer.render(scene, camera)
   }
