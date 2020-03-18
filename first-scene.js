@@ -44,6 +44,10 @@ const init = () => {
 
   Object.values(objects).map(object => create(object, scene))
 
+  const spotLight = new THREE.SpotLight(0xffffff)
+  spotLight.position.set(-40, 60, -10)
+  scene.add(spotLight)
+
   camera.position.x = -30
   camera.position.y = 40
   camera.position.z = 30
