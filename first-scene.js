@@ -1,7 +1,8 @@
-const create = ({ geometry, color, positions, shadow }, scene) => {
+const create = (key, { geometry, color, positions, shadow }, scene) => {
   const getGeometry = geometry
   const getMaterial = new THREE.MeshPhongMaterial({ color })
   const object = new THREE.Mesh(getGeometry, getMaterial)
+  object.name = key
   object.rotation.x = positions[0]
   object.position.x = positions[1]
   object.position.y = positions[2]
@@ -57,7 +58,7 @@ const init = () => {
     },
   }
 
-  Object.values(objects).map(object => create(object, scene))
+  Object.entries(objects).map(([key, object]) => create(key, object, scene))
 
   const spotLight = new THREE.SpotLight(0xffffff)
   spotLight.position.set(-40, 60, -10)
@@ -73,6 +74,12 @@ const init = () => {
 
   const renderScene = () => {
     stats.update()
+
+    const cube = scene.children.find(child => child.name === 'cube')
+    cube.rotation.x += 0.02
+    cube.rotation.y += 0.02
+    cube.rotation.z += 0.05
+
     requestAnimationFrame(renderScene)
     renderer.render(scene, camera)
   }
