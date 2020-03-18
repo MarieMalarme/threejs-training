@@ -19,6 +19,15 @@ const getStats = () => {
   return stats
 }
 
+const controls = {
+  rotation: 0.02,
+  revolution: 0.03,
+}
+
+const gui = new dat.GUI()
+gui.add(controls, 'rotation', 0, 0.5)
+gui.add(controls, 'revolution', 0, 0.5)
+
 const init = () => {
   const scene = new THREE.Scene()
   const camera = new THREE.PerspectiveCamera(
@@ -78,12 +87,12 @@ const init = () => {
     stats.update()
 
     const cube = scene.children.find(child => child.name === 'cube')
-    cube.rotation.x += 0.02
-    cube.rotation.y += 0.02
-    cube.rotation.z += 0.05
+    cube.rotation.x += controls.rotation
+    cube.rotation.y += controls.rotation
+    cube.rotation.z += controls.rotation
 
     const sphere = scene.children.find(child => child.name === 'sphere')
-    step += 0.04
+    step += controls.revolution
     sphere.position.x = 20 * Math.cos(step)
     sphere.position.y = 20 * Math.sin(step)
 
