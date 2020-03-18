@@ -1,6 +1,6 @@
-const create = ({ geometry, material, positions }, scene) => {
+const create = ({ geometry, color, positions }, scene) => {
   const getGeometry = geometry
-  const getMaterial = new THREE.MeshBasicMaterial(material)
+  const getMaterial = new THREE.MeshPhongMaterial({ color })
   const object = new THREE.Mesh(getGeometry, getMaterial)
   object.rotation.x = positions[0]
   object.position.x = positions[1]
@@ -27,17 +27,17 @@ const init = () => {
   const objects = {
     plane: {
       geometry: new THREE.PlaneGeometry(60, 20),
-      material: { color: 0xb300ff },
+      color: 0xb300ff,
       positions: [-0.5 * Math.PI, 15, 0, 0],
     },
     cube: {
       geometry: new THREE.BoxGeometry(4, 4, 4),
-      material: { color: 0xe5ff00, wireframe: true },
+      color: 0xe5ff00,
       positions: [0, -4, 3, 0],
     },
     sphere: {
       geometry: new THREE.SphereGeometry(4, 20, 20),
-      material: { color: 0xe5ff00, wireframe: true },
+      color: 0x00ff7b,
       positions: [0, 20, 4, 2],
     },
   }
